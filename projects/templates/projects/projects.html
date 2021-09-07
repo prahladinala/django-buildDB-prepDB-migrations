@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- {{message}} -->
+<p>Hello you are on the {{page}} page</p>
+
+<!-- <p>IF STATEMENT</p>
+{% if number > 10 %}
+<p>Number is greater than 10</p>
+{% endif %} -->
+
+<!-- <p>IF ELSE STATEMENT</p>
+{% if number > 10 %}
+<p>Number is greater than 10</p>
+{% else %}
+<p>Number is less than 10</p>
+{% endif %} -->
+
+<p>IF ELSE ELIF STATEMENT</p>
+
+{% if number > 10 %}
+<p>Number is greater than 10</p>
+
+{% elif number == 10 %}
+<p>Number is exactly 10</p>
+
+{% else %}
+<p>Number is less than 10</p>
+
+{% endif %}
+
+<hr>
+
+<h1>Projects</h1>
+
+<ul>
+    {% for project in projects %}
+    <!-- NOT RECOMMENDED BY DJANGO -->
+    <!-- <li><a href="/project/{{project.id}}">Title: {{ project.title }} --- {{project.description }}</a></li> -->
+    <!-- RECOMMENDED BY DJANGO -->
+    <li><a href="{% url 'project' project.id %}">Title: {{ project.title }} --- {{project.description }}</a></li>
+    <!-- SYNTAX > {% url 'NAME_WE_PASSED_IN_URLS.PY_PATH' DYNAMIC_VALUE%} -->
+    <!-- URLS.PY path('project/<str:pk>', views.project, name="project") -->
+    <!-- ADVANTAGES > Even we change the path example > project to project-object 
+        LINK wont work> we have to change manually
+        NAME will not be changed -->
+    {% endfor %}
+</ul>
+
+<p>PATH > [OUR APP FOLDER]/templates/[OUR APP FOLDER NAME]</p>
+<p>Mostly main.html and navbar.html will stay in [ROOT DIR]/templates</p>
+<p>Because the main.html and navbar.html will be same for all apps</p>
+<p>But the projects.html and single-project.html will change depending upon the app</p>
+<p>This is the way django likes to organize file structure</p>
+
+<p>TEMPLATE ENGINE > uses Jinjer</p>
+{% endblock content %}
